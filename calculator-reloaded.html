@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+
+	<style type="text/css">
+		
+		.btns{
+			width: 80px;
+			background-color: #7FDBFF;
+			color: #85144b;
+			font-size: 25px;
+			height: 40px;
+			border-radius: 5px;
+			outline: none;
+		}
+
+		form{
+			width: 600px;
+		}
+
+		table{
+			display: table;
+		    border-collapse: separate;
+		    border-spacing: 5px;
+		    border-color: purple;
+		}
+		#ans_screen{
+			width: 99%;
+			height: 40px;
+			border-color: #85144b;
+			font-size: 35px;
+			text-align: right;
+		}
+
+		#input_screen{
+			width: 99%;
+			height: 30px;
+			border-color: #85144b;
+			font-size: 27px;
+			text-align: right;
+		}
+
+		td{
+			border:none;
+		}
+		/*.vis{
+			display: block;
+		}*/
+		.inv {
+			display: none;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div>
+		<center>
+			<p style="font-size: 60px;">Scientific Calculator</p>
+		</center>
+	</div>
+
+
+
+	<center>
+		<form name="Calc" action="">
+			<table border=2 ; cell-spacing="5">
+
+				<tr>
+					<td colspan="7">
+						<input type="text" value=" " name="ansScreen" disabled="" id="ans_screen" >
+					</td>
+				</tr>
+
+
+				<tr>
+					<td colspan="7">
+						<input value="0" name="inputScreen" disabled="" id="input_screen">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						<input type="button" name="btnRad" value="Rad" onclick="if (checkNum(this.form.inputScreen.value)) {Rad(this.form) }" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnDeg" value="Deg" onclick="if (checkNum(this.form.inputScreen.value)) {Deg(this.form) }" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnx!" value="x!" onclick="if (checkNum(this.form.inputScreen.value)) {!(this.form) }" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnBracket1" value="(" onclick="getNumberValue('(')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnBracket2" value=")" onclick="getNumberValue(')')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="C" value="C" onclick="clearRec();" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnClearEntry" value="CE" onclick="clearEntry()" class="btns" id="clear">
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>
+						<input type="button" name="btnInv" value="inv" class="btns" onclick="showOne()" >
+					</td>
+
+
+					<td>
+						<input type="button" name="btnSin" value="sin" onclick="sin()" class="btns vis" id="vis1">
+
+						<input type="button" name="btnAsin" value="sin-1" onclick="asin()" class="btns inv" id="inv1"> 
+					</td>
+
+
+					<td>
+						<input type="button" name="btnLn" value="ln" onclick="ln()" class="btns vis" id="vis2">
+
+						<input type="button" name="btnLn" value="1-ln" onclick="invln()" class="btns inv" id="inv2">
+					</td>
+
+
+					<td>
+						<input type="button" name="btnSeven" value="7" onclick="getNumberValue('7')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnEight" value="8" onclick="getNumberValue('8')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnNine" value="9" onclick="getNumberValue('9')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnDivide" value="÷" onclick="setOperator('/')" class="btns">
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>
+						<input type="button" name="btnPie" value="&#960;" onclick="if (checkNum(this.form.inputScreen.value)) {PI(this.form) }" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnCos" value="cos" onclick="cos()" class="btns vis" id="vis3">
+						<input type="button" name="btnCos" value="acos" onclick="acos()" class="btns inv" id="inv3">
+					</td>
+
+
+					<td>
+						<input type="button" name="btnLog" value="log" onclick="log()" class="btns vis" id="vis4">
+						<input type="button" name="btnLog" value="-log" onclick="antilog()" class="btns inv" id="inv4">
+					</td>
+
+					<td>
+						<input type="button" name="btnFour" value="4" onclick="getNumberValue('4')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnFive" value="5" onclick="getNumberValue('5')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnSix" value="6" onclick="getNumberValue('6')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnX" value="x" onclick="setOperator('x')" class="btns">
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>
+						<input type="button" name="btnE" value="e" onclick="" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnTan" value="tan" onclick="tan()" class="btns vis" id="vis5">
+						<input type="button" name="btnAtan" value="atan" onclick="atan()" class="btns inv" id="inv5">
+					</td>
+
+					<td>
+						<input type="button" name="btnSqrt" value="√" onclick="squareRoot()" class="btns vis" id="vis6">
+						<input type="button" name="btnCbrt" value="3√x" onclick="cubeRoot()" class="btns inv" id="inv6">
+					</td>
+
+					<td>
+						<input type="button" name="btnOne" value="1" onclick="getNumberValue('1')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnTwo" value="2" onclick="getNumberValue('2')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnThree" value="3" onclick="getNumberValue('3')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnMinus" value="-" onclick="setOperator('-')" class="btns">
+					</td>
+				</tr>
+
+
+
+				<tr>
+					<td>
+						<input type="button" name="btnPercent" value="%" onclick="percent()" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnExp" value="Exp" onclick="exp()" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnPower" value="x^2" onclick="square()" class="btns vis" id="vis7">
+						<input type="button" name="btnPower" value="x^y" onclick="addChar(this.form.inputScreen, '^')"  class="btns inv" id="inv7">
+					</td>
+
+					<td>
+						<input type="button" name="btnZero" value="0" onclick="getNumberValue('0')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnDot" value="." onclick="getNumberValue('.')" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnEqual" value="=" onclick="calculate()" class="btns">
+					</td>
+
+					<td>
+						<input type="button" name="btnPlus" value="+" onclick="setOperator('+')" class="btns">
+					</td>
+				</tr>
+
+			</table>
+
+		</form>
+	</center>
+
+
+
+	<script type="text/javascript">
+
+		var first_num = null
+		var second_num = null
+		var has_operator = false
+		var first_num_decimal = false
+		var second_num_decimal = false
+		var operator_value = null
+		var txt_box = document.getElementById('input_screen');
+		var ans_area = document.getElementById('ans_screen');
+		//var clear=document.getElementById('clear');
+		var txt_box_value = ""
+		
+		var getNumberValue = function(val) {
+
+			if(has_operator==false){
+
+				if(val=="." && first_num_decimal==false){
+					first_num_decimal = true;
+					first_num = first_num+val;
+					txt_box.value = first_num;
+				}else if(val=="." && first_num_decimal==true){
+
+				}else {
+					if(first_num){
+						first_num = first_num+val;
+					}
+					else{
+						first_num=val;
+					}
+					txt_box.value = first_num;
+				}
+				
+			}else{
+
+				if(val=="." && second_num_decimal==false){
+					second_num_decimal = true;
+					second_num = second_num+val;
+					txt_box.value = first_num + operator_value + second_num;
+				}else if(val=="." && second_num_decimal==true){
+
+				}else{
+					if(second_num){
+						second_num = second_num+val;
+					}else{
+						second_num=val;
+					}
+					txt_box.value = first_num + operator_value + second_num;
+				}
+			}
+
+		};
+
+
+		var setOperator = function(val) {
+			if(val && has_operator==false){
+				has_operator=true;
+				operator_value =val;
+				txt_box.value = first_num+" "+operator_value;
+			}else if(val && has_operator==true){
+				first_num = calculate()
+				has_operator=true;
+				operator_value = val;
+				txt_box.value = first_num + operator_value;
+			}
+		};
+
+
+		var calculate = function(){
+			
+			ans = null;
+			if(first_num==null){
+				first_num = 0;
+			}
+			if(second_num==null){
+				second_num = 0;
+				txt_box.value = first_num + operator_value + second_num;
+			}
+			if(operator_value=="+"){
+				if(second_num_decimal==true || first_num_decimal==true){
+					ans = parseFloat(first_num) + parseFloat(second_num);
+				}else{
+					ans = parseInt(first_num) + parseInt(second_num);
+				}
+			}
+
+			else if(operator_value=="-"){
+				if(second_num_decimal==true || first_num_decimal==true){
+					ans = parseFloat(first_num) - parseFloat(second_num);
+				}else{
+					ans = parseInt(first_num) - parseInt(second_num);
+				}
+			}
+
+			else if(operator_value=="x"){
+				if(second_num_decimal==true || first_num_decimal==true){
+					ans = parseFloat(first_num) * parseFloat(second_num);
+				}else{
+					ans = parseInt(first_num) * parseInt(second_num);
+				}
+			}
+
+			else if(operator_value=="/"){
+				if(second_num_decimal==true || first_num_decimal==true){
+					ans = parseFloat(first_num) / parseFloat(second_num);
+				}else{
+					ans = parseFloat(first_num) / parseFloat(second_num);
+				}
+			}
+
+			else{
+				if(second_num_decimal==true || first_num_decimal==true){
+					ans = parseFloat(first_num);
+				}else{
+					ans = parseInt(first_num);
+				}
+			};
+
+			first_num = ans;
+			//second_num = '';
+			//operator_value = '';
+			//txt_box.value = first_num+" "+operator_value+" "+second_num;
+			ans_area.value="Answer ="+ans;
+			txt_box.value=ans;
+
+			return ans;
+			clearRec();
+			
+
+
+			// var txt_incl_1 = txt_box.value.includes('(');
+			// var txt_incl_2 = txt_box.value.includes(')');
+			// if (txt_incl_1 || txt_incl_2) {
+			// 	eval(txt_box.value);
+			// }
+		};
+
+		
+		var clearRec = function(){
+			first_num=null;
+			second_num=null;
+			operator_value=null;
+			has_operator=false;
+			first_num_decimal = false;
+			second_num_decimal = false;
+			txt_box.value='';
+			ans_area.value='';
+		};
+
+		var clearEntry=function(val){
+			txt_box.value = txt_box.value.substring(0, txt_box.value.length - 1);
+			
+			second_num = '';
+			has_operator = '';
+			first_num = txt_box.value;
+		};
+
+
+		var squareRoot=function(){
+			if (first_num==null) {
+				first_num=0;
+			}
+			ans=Math.sqrt(first_num);
+			first_num = ans;
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans;
+		};
+
+		var sin=function(){
+			if (first_num==null) {
+				first_num=0;
+			}
+			ans=Math.sin(first_num);
+			first_num = ans;
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans;
+		};
+
+		var asin=function(){
+			if (first_num==null) {
+				first_num=0;
+			}
+			ans=Math.asin(first_num);
+			first_num = ans;
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans;
+		};
+
+
+		var cubeRoot=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.cbrt(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+
+		var square=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=first_num * first_num;
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var tan=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.tan(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var atan=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.atan(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var cos=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.cos(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var acos=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.acos(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var ln=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.log(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var invln=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.E(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var log=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.log10(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var antilog=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.pow(10, first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var e=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.E(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var exp=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans=Math.exp(first_num)
+			first_num = ans
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans
+		};
+
+		var percent=function(){
+			if (first_num==null) {
+				first_num=0
+			}
+			ans= parseFloat(first_num / 100);
+			first_num = ans;
+			ans_area.value="Answer = "+ans;
+			txt_box.value=ans;
+		};
+
+		
+
+
+
+
+
+			
+					
+
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
